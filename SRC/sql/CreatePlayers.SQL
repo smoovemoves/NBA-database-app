@@ -1,0 +1,7 @@
+CREATE TABLE Players (
+    PlayerID SERIAL PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    TeamID INTEGER,
+    Position VARCHAR(10),
+    FOREIGN KEY (TeamID) REFERENCES Teams(TeamID)
+);

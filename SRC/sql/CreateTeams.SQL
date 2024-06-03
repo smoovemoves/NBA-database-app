@@ -1,0 +1,4 @@
+CREATE TABLE Teams (
+    TeamID SERIAL PRIMARY KEY,
+    TeamName VARCHAR(50) NOT NULL
+);

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NBA Players</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <header>
+        <h1>NBA Players</h1>
+    </header>
+    <main>
+        <ul class="player-list">
+            {% for player in players %}
+                <li class="player-item">
+                    <a href="{{ url_for('player', player_id=player[0]) }}">
+                        {{ player[1] }} ({{ player[3] }})
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </main>
+</body>
+</html>

@@ -1,0 +1,8 @@
+CREATE TABLE Stats (
+    StatID SERIAL PRIMARY KEY,
+    PlayerID INTEGER NOT NULL,
+    Points INTEGER NOT NULL,
+    Assists INTEGER NOT NULL,
+    Rebounds INTEGER NOT NULL,
+    FOREIGN KEY (PlayerID) REFERENCES Players(PlayerID)
+);
