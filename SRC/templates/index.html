@@ -7,9 +7,13 @@
 <body>
     <h1>NBA Players</h1>
     <ul>
-        {% for player in players %}
-            <li><a href="{{ url_for('player', player_id=player[0]) }}">{{ player[1] }} ({{ player[3] }})</a></li>
-        {% endfor %}
+        {% if players %}
+            {% for player in players %}
+                <li><a href="{{ url_for('player', player_id=player[0]) }}">{{ player[1] }} ({{ player[3] }})</a></li>
+            {% endfor %}
+        {% else %}
+            <li>No players found.</li>
+        {% endif %}
     </ul>
 </body>
 </html>

@@ -1,7 +1,12 @@
-CREATE TABLE Players (
+DROP TABLE IF EXISTS Stats;
+DROP TABLE IF EXISTS Players;
+DROP TABLE IF EXISTS Teams;      
+
+CREATE TABLE IF NOT EXISTS Players (
     PlayerID SERIAL PRIMARY KEY,
-    Name VARCHAR(100) NOT NULL,
-    TeamID INTEGER,
-    Position VARCHAR(10),
-    FOREIGN KEY (TeamID) REFERENCES Teams(TeamID)
-);
+    FullName VARCHAR(100) NOT NULL,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    IsActive BOOLEAN
+)
+        
