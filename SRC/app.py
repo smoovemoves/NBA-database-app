@@ -1,6 +1,8 @@
 import csv
 import psycopg2
 from flask import Flask, render_template
+from flask import request
+
 
 app = Flask(__name__)
 
@@ -18,14 +20,12 @@ def import_data():
     cur = conn.cursor()
     
     try:
-        with open('/Users/ulrikkjaer/Desktop/NBA-database-app/data/player.csv', 'r') as file:
+        with open('/Users/ulrikkjaer/Desktop/NBA-database-app/data/common_player_info.csv', 'r') as file:
             reader = csv.DictReader(file)
             for row in reader:
-                print(f"Reading row: {row}")
-                print(f"Inserting player: {row['full_name']}, FirstName: {row['first_name']}, LastName: {row['last_name']}, IsActive: {row['is_active']}")
                 cur.execute(
-                    "INSERT INTO Players (FullName, FirstName, LastName, IsActive) VALUES (%s, %s, %s, %s)", 
-                    (row['full_name'], row['first_name'], row['last_name'], row['is_active'])
+                    "INSERT INTO Players (PlayerID, FullName, Team_name, height, Weight_p) VALUES (%s, %s, %s, %s)", 
+                    (row['person_id'], row['display_first_last'], row['team_name'], row['height'], row['weight'])
                 )
         conn.commit()
     except Exception as e:
@@ -45,7 +45,6 @@ def index():
     cur = conn.cursor()
     cur.execute('SELECT * FROM Players;')
     players = cur.fetchall()
-    print(f"Fetched players: {players}")
     cur.close()
     conn.close()
     return render_template('index.html', players=players)
@@ -60,7 +59,36 @@ def player(player_id):
     conn.close()
     return render_template('player.html', player=player)
 
-if __name__ == '__main__':
+@app.route('/Search', methods=['GET', 'POST'])
+def search():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM Players WHERE FullName LIKE %s;', ('%'+request.form['search']+'%',))
+    players = cur.fetchall()
+    cur.close()
+    conn.close()
+    return render_template('index.html', players=players)
 
+@app.route('/FilterHeight', methods=['POST'])
+def filter_height():
+    conn = get_db_connection()
+    cur = conn.cursor()
+
+    min_height = request.form['min_height']
+    max_height = request.form['max_height']
+
+    # Convert heights to inches if they're in feet
+    min_height_in_inches = int(min_height.split("-")[0]) * 12 + int(min_height.split("-")[1])
+    max_height_in_inches = int(max_height.split("-")[0]) * 12 + int(max_height.split("-")[1])
+
+    cur.execute("SELECT * FROM Players WHERE height LIKE '%%-%%' AND (CAST(SUBSTRING(height FROM 1 FOR POSITION('-' IN height) - 1) AS INTEGER) * 12 + CAST(SUBSTRING(height FROM POSITION('-' IN height) + 1) AS INTEGER)) BETWEEN %s AND %s;", (min_height_in_inches, max_height_in_inches))
+
+    players = cur.fetchall()
+    cur.close()
+    conn.close()
+
+    return render_template('index.html', players=players)
+
+if __name__ == '__main__':
     import_data()
     app.run(debug=True)

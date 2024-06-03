@@ -1,3 +1,4 @@
+
 CREATE TABLE Stats (
     StatID SERIAL PRIMARY KEY,
     PlayerID INTEGER NOT NULL,

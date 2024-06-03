@@ -6,10 +6,24 @@
 </head>
 <body>
     <h1>NBA Players</h1>
+    # search form for name 
+    <form action="{{ url_for('search') }}" method="post">
+    <label for="name">Name:</label>
+    <input type="text" name="search" id="name" value="{{ name }}">
+    <input type="submit" value="Search">
+    </form>
+     # search form for height
+    <form action="{{ url_for('filter_height') }}" method="post">
+    <label for="min_height">Min Height:</label>
+    <input type="text" name="min_height" id="min_height" value="{{ min_height }}">
+    <label for="max_height">Max Height:</label>
+    <input type="text" name="max_height" id="max_height" value="{{ max_height }}">
+    <input type="submit" value="Submit">
+    </form>
     <ul>
         {% if players %}
             {% for player in players %}
-                <li><a href="{{ url_for('player', player_id=player[0]) }}">{{ player[1] }} ({{ player[3] }})</a></li>
+                <li><a href="{{ url_for('player', player_id=player[0]) }}">{{ player[1] }} </a></li>
             {% endfor %}
         {% else %}
             <li>No players found.</li>

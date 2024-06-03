@@ -5,8 +5,8 @@ DROP TABLE IF EXISTS Teams;
 CREATE TABLE IF NOT EXISTS Players (
     PlayerID SERIAL PRIMARY KEY,
     FullName VARCHAR(100) NOT NULL,
-    FirstName VARCHAR(50),
-    LastName VARCHAR(50),
-    IsActive BOOLEAN
+    Team_name VARCHAR(50),
+    height VARCHAR(50),
+    Weight_p VARCHAR(10)
 )
         

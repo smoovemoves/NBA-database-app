@@ -1,7 +1,7 @@
 body {
-    background: #133e7c;
+    background: #ffffff;
     font-family: 'Press Start 2P', sans-serif;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(0, 255, 51, 0.8);
     margin: 0;
     padding: 0;
 }
@@ -13,7 +13,7 @@ header {
 }
 
 h1 {
-    color: #ea00d9;
+    color: #ff0000;
     margin: 0;
 }
 
