@@ -6,15 +6,11 @@
 </head>
 <body>
     <h1>{{ player[1] }}</h1>
-    <p>Team: {{ player[2] }}</p>
+    Team: <a href="/team/{{ player[2] }}">{{ player[2] }}</a>
     <p>Height: {{ player[3] }} feet-inches</p>
     <p>Weight: {{ player[4] }} lbs</p>
     <h2>Stats</h2>
-    <ul>
-        {% for stat in stats %}
-            <li>Points: {{ stat[2] }}, Assists: {{ stat[3] }}, Rebounds: {{ stat[4] }}</li>
-        {% endfor %}
-    </ul>
+    <p>Is an active NBA player:{{stats[1]}}</p>
     <a href="{{ url_for('index') }}">Back to player list</a>
 </body>
 </html>

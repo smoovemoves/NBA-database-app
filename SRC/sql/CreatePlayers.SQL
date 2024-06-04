@@ -1,12 +1,11 @@
-DROP TABLE IF EXISTS Stats;
-DROP TABLE IF EXISTS Players;
-DROP TABLE IF EXISTS Teams;      
+DROP TABLE IF EXISTS Players;  
 
 CREATE TABLE IF NOT EXISTS Players (
-    PlayerID SERIAL PRIMARY KEY,
+    PlayerID INT,
     FullName VARCHAR(100) NOT NULL,
     Team_name VARCHAR(50),
     height VARCHAR(50),
-    Weight_p VARCHAR(10)
+    Weight_p VARCHAR(10), 
+    PRIMARY KEY (PlayerID)
 )
         
