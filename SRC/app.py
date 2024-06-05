@@ -24,6 +24,10 @@ def import_data():
         with open('/Users/ulrikkjaer/Desktop/NBA-database-app/data/common_player_info.csv', 'r') as file:
             reader = csv.DictReader(file)
             for row in reader:
+                cur.execute(
+                    "INSERT INTO Teams (TeamName, team_abbreviation, team_code, team_city) VALUES (%s, %s, %s, %s)",
+                    (row['team_name'], row['team_abbreviation'], row['team_code'], row['team_city'])
+                )
                 cur.execute("SELECT * FROM Players WHERE PlayerID = %s", (row['person_id'],))
                 if cur.fetchone() is None:
                     cur.execute(
@@ -109,15 +113,27 @@ def filter_height():
 
     return render_template('index.html', players=players, error_message=error_message)
 
-@app.route('/team/<team_name>', methods=['GET'])
-def team(team_name):
+@app.route('/team/<team_name>', methods=['GET', 'POST'])
+def team_stats(team_name):
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('SELECT * FROM Players WHERE Team_name = %s;', (team_name,))
+    cur.execute("SELECT * FROM Teams WHERE TeamName = %s", (team_name,))
+    team = cur.fetchone()
+    cur.execute("SELECT * FROM Players WHERE players.team_name = %s", (team_name,))
     players = cur.fetchall()
     cur.close()
     conn.close()
-    return render_template('index.html', players=players)
+    return render_template('team_stats.html', team=team, players=players)
+
+@app.route('/teams')
+def teams():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT DISTINCT teams.teamname FROM Teams") 
+    teams = cur.fetchall()
+    cur.close()
+    conn.close()
+    return render_template('teams.html', teams=teams)
                            
 if __name__ == '__main__':
     import_data()

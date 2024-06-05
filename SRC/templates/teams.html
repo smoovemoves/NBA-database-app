@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teams List</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <header>
+        <h1>NBA Teams</h1>
+    </header>
+    <main>
+        <ul>
+            {% for team in teams %}
+                <li><a href="{{ url_for('team_stats', team_name=team[0]) }}">{{ team[0] }}</a></li>
+            {% endfor %}
+        </ul>
+    </main>
+    <footer>
+        <p>&copy; 2022 NBA</p>
+    </footer>
+</body>
+</html>
