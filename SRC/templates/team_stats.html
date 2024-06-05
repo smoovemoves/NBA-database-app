@@ -1,11 +1,98 @@
-<h1>{{ team[1] }}</h1>
-<p>Abbreviation: {{ team[2] }}</p>
-<p>Code: {{ team[3] }}</p>
-<p>City: {{ team[4] }}</p>
-
-<h2>Former and Current Teammates</h2>
-<ul>
-    {% for player in players %}
-        <li>{{ player[1] }}</li>  <!-- Assuming player[1] is the player's name -->
-    {% endfor %}
-</ul>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ team[1] }} - Details</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f5;
+            margin: 0;
+            padding: 20px;
+        }
+        header, footer {
+            text-align: center;
+            padding: 20px 0;
+        }
+        h1, h2 {
+            color: #4400ff;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 10px;
+        }
+        h2 {
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .team-details p, .teammates ul {
+            margin: 10px 0;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .back-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        footer {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>{{ team[1] }}</h1>
+        </header>
+        <div class="team-details">
+            <p>Abbreviation: {{ team[2] }}</p>
+            <p>Code: {{ team[3] }}</p>
+            <p>City: {{ team[4] }}</p>
+        </div>
+        <h2>Former and Current Teammates</h2>
+        <div class="teammates">
+            <ul>
+                {% for player in players %}
+                    <li>{{ player[1] }}</li>  <!-- Assuming player[1] is the player's name -->
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="back-links">
+            <a href="{{ url_for('teams') }}">Back to Teams</a>
+            <a href="{{ url_for('index') }}">Back to player list</a>
+        </div>
+        <footer>
+            <p>&copy; 2022 NBA</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -4,31 +4,107 @@
     <title>NBA Players</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f5;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        form {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
         .big-button {
             font-size: 20px;
             padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+        }
+        .big-button:hover {
+            background-color: #218838;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background-color: #fff;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        li a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+        li a:hover {
+            text-decoration: underline;
+        }
+        .error-message {
+            color: red;
+            font-weight: bold;
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <h1>NBA Players</h1>
     <form action="{{ url_for('search') }}" method="post">
-    <label for="name">Name:</label>
-    <input type="text" name="search" id="name" value="{{ name }}">
-    <input type="submit" value="Search">
+        <label for="name">Name:</label>
+        <input type="text" name="search" id="name" value="{{ name }}">
+        <input type="submit" value="Search">
     </form>
     <form action="{{ url_for('filter_height') }}" method="post">
-    <label for="min_height">Min Height:</label>
-    <input type="text" name="min_height" id="min_height" value="{{ min_height }}">
-    <label for="max_height">Max Height:</label>
-    <input type="text" name="max_height" id="max_height" value="{{ max_height }}">
-    <input type="submit" value="Submit">
+        <label for="min_height">Min Height:</label>
+        <input type="text" name="min_height" id="min_height" value="{{ min_height }}">
+        <label for="max_height">Max Height:</label>
+        <input type="text" name="max_height" id="max_height" value="{{ max_height }}">
+        <input type="submit" value="Submit">
     </form>
     <a href="{{ url_for('teams') }}">
-    <button class="big-button">Teams</button>
+        <button class="big-button">Teams</button>
     </a>
     {% if error_message %}
-    <p style="color:red;">{{ error_message }}</p>
+        <p class="error-message">{{ error_message }}</p>
     {% endif %}
     <ul>
         {% if players %}
@@ -41,4 +117,3 @@
     </ul>
 </body>
 </html>
-

@@ -3,14 +3,69 @@
 <head>
     <title>{{ player[1] }} - Details</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f5;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 10px;
+        }
+        h2 {
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .player-details, .player-stats {
+            margin-bottom: 20px;
+        }
+        .player-details p, .player-stats p {
+            margin: 10px 0;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
-    <h1>{{ player[1] }}</h1>
-    Team: <a href="/team/{{ player[2] }}">{{ player[2] }}</a>
-    <p>Height: {{ player[3] }} feet-inches</p>
-    <p>Weight: {{ player[4] }} lbs</p>
-    <h2>Stats</h2>
-    <p>Is an active NBA player:{{stats[1]}}</p>
-    <a href="{{ url_for('index') }}">Back to player list</a>
+    <div class="container">
+        <h1>{{ player[1] }}</h1>
+        <div class="player-details">
+            <p>Team: <a href="/team/{{ player[2] }}">{{ player[2] }}</a></p>
+            <p>Height: {{ player[3] }} feet-inches</p>
+            <p>Weight: {{ player[4] }} lbs</p>
+        </div>
+        <h2>Stats</h2>
+        <div class="player-stats">
+            <p>Position: {{ stats[2] }}</p>
+            <p>Bench Press reps (185 lbs): {{ stats[3] }} </p>
+            <p>NBA status: {{ stats[1] }}</p>
+        </div>
+        <a class="back-link" href="{{ url_for('index') }}">Back to player list</a>
+    </div>
 </body>
 </html>

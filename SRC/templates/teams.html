@@ -3,6 +3,60 @@
 <head>
     <title>Teams List</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f5;
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 20px 0;
+        }
+        h1 {
+            color: #0800ff;
+        }
+        main {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -11,9 +65,10 @@
     <main>
         <ul>
             {% for team in teams %}
-                <li><a href="{{ url_for('team_stats', team_name=team[0]) }}">{{ team[0] }}</a></li>
+            <li><a href="{{ url_for('team_stats', team_name=team[0]) }}">{{ team[0] }}</a></li>
             {% endfor %}
         </ul>
+        <a class="back-link" href="{{ url_for('index') }}">Back to player list</a>
     </main>
     <footer>
         <p>&copy; 2022 NBA</p>

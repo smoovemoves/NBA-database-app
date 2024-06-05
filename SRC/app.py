@@ -9,9 +9,9 @@ app = Flask(__name__)
 
 def get_db_connection():
     conn = psycopg2.connect(
-        dbname='nba_db',
-        user='postgres',
-        password='X9xf6y8gx77m2d',
+        dbname='Your database name',
+        user='your username',
+        password='your password',
         host='localhost'
     )
     return conn
@@ -21,7 +21,7 @@ def import_data():
     cur = conn.cursor()
     
     try:
-        with open('/Users/ulrikkjaer/Desktop/NBA-database-app/data/common_player_info.csv', 'r') as file:
+        with open('path to data file/common_player_info.csv', 'r') as file:
             reader = csv.DictReader(file)
             for row in reader:
                 cur.execute(
@@ -35,9 +35,19 @@ def import_data():
                         (row['person_id'], row['display_first_last'], row['team_name'], row['height'], row['weight'])
                     )
                     cur.execute(
-                        "INSERT INTO Stats (PlayerID, rosterstatus) VALUES (%s, %s)",
-                        (row['person_id'], row['rosterstatus'])
+                        "INSERT INTO Stats (PlayerID, rosterstatus, position, bench_press) VALUES (%s, %s, %s, %s)",
+                        (row['person_id'], row['rosterstatus'], row['position'], 'No data')
                     )
+        conn.commit()
+
+        with open('your path to data file/draft_combine_stats.csv', 'r') as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                bench_press = str(row['bench_press'])
+                cur.execute(
+                    "UPDATE Stats SET bench_press = %s WHERE PlayerID = %s",
+                    (bench_press, row['player_id'])
+            )
         conn.commit()
     except Exception as e:
         print("Error occurred:", e)

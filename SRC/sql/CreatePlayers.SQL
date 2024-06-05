@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS Players;  
+DROP TABLE IF EXISTS Players;    
 
-CREATE TABLE IF NOT EXISTS Players (
+CREATE TABLE Players (
     PlayerID INT,
     FullName VARCHAR(100) NOT NULL,
     Team_name VARCHAR(50),
