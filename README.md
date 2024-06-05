@@ -22,3 +22,17 @@ Assuming that the system contains a modern and functional Python 3 & SQL install
 _________________________________________________________________________
 
 # Navigating in the webapp
+
+(1) When starting the webapp, you should be able to run through a long list of active and inactive players.
+
+(2) You can use the search bar to specify which players you are looking for, e.g:
+
+        'Dan' should list all players containing this sequence of letters. This search bar IS NOT case-sensitive.
+
+(3) The height filter demands a specific type of input. Since the height is denoted according to the imperial system, you should feed the webapp with an input of this sort:
+
+        Max-height = 6-0    ,    Min-height = 6-2
+
+(4) Clicking on a player moves you to a section providing informations about the specific player.
+
+(5) You can use the 'Teams' button on the main page to access a list of all the NBA teams. From here you can click on a specific team to get further information.
