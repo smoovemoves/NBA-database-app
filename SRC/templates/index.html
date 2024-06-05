@@ -3,6 +3,12 @@
 <head>
     <title>NBA Players</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+    <style>
+        .big-button {
+            font-size: 20px;
+            padding: 10px 20px;
+        }
+    </style>
 </head>
 <body>
     <h1>NBA Players</h1>
@@ -18,6 +24,9 @@
     <input type="text" name="max_height" id="max_height" value="{{ max_height }}">
     <input type="submit" value="Submit">
     </form>
+    <a href="{{ url_for('teams') }}">
+    <button class="big-button">Teams</button>
+    </a>
     {% if error_message %}
     <p style="color:red;">{{ error_message }}</p>
     {% endif %}
@@ -32,3 +41,4 @@
     </ul>
 </body>
 </html>
+

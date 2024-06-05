@@ -1,0 +1,11 @@
+<h1>{{ team[1] }}</h1>
+<p>Abbreviation: {{ team[2] }}</p>
+<p>Code: {{ team[3] }}</p>
+<p>City: {{ team[4] }}</p>
+
+<h2>Former and Current Teammates</h2>
+<ul>
+    {% for player in players %}
+        <li>{{ player[1] }}</li>  <!-- Assuming player[1] is the player's name -->
+    {% endfor %}
+</ul>
